@@ -10,19 +10,28 @@ The Dataiku Data Scientist Technical Assesment: Binary Classication Task
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+adsfasdasdf
+asdfsa
+fdsa
+fad
+fa
+dfa
+f
+asfd
+as
+fa
+sf
+sa
+fas
+df
+sadf
+sa
+fas
+df
+sadf
+sad
+fas
+fdas
 
 
 
