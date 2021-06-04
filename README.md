@@ -23,12 +23,12 @@ This repository aims to explain the process of how I handled the project. Since 
 
 The first thing I noticed in the given Census data some of the columns are missing such as 'total_earnings' or 'adjusted_gross_income'. These are missing on purpose for creating the task. Here is the full list of which columns are missing:
 ```
-* adjusted gross income
-* federal income tax liability
-* instance weight
-* total person earnings
-* total person income
-* taxable income amount
+adjusted gross income
+federal income tax liability
+instance weight
+total person earnings
+total person income
+taxable income amount
 ```
 The other first thing was understanding what is **Not in Universe** means because most of the features have it. It implies that the person was not a part of the population to which the question was directed. 
 
