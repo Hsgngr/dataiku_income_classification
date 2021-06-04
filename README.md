@@ -46,49 +46,49 @@ The other first thing was understanding what is **Not in Universe** means becaus
  There are 42 features in total, 35 nominal, 8 continuous including the label column. Here is the full list of features:
 
 ```  
-FEATURE NAME                             FEATURE TYPE 
-age                                             int64
-class_of_work                                category
-industry_code                                category
-occupation_code                              category
-education                                    category
-wage_per_hour                                   int64
-enrolled_in_edu_inst_last_wk                 category
-marital_status                               category
-major_industry_code                          category
-major_occupation_code                        category
-race                                         category
-hispanic_origin                              category
-sex                                          category
-member_of_labor_union                        category
-reason_for_unemployment                      category
-full_or_part_time_employment_stat            category
-capital_gains                                   int64
-capital_losses                                  int64
-dividends_from_stocks                           int64
-tax_filer_status                             category
-region of previous residence                 category
-state_of_previous_residence                  category
-detailed_household_and_family_stat           category
-detailed_household_summary_in_household      category
-instance_weightt                              float64
-migration_code_change_in_msa                 category
-migration_code_change_in_reg                 category
-migration_code_move_within_reg               category
-live_in_this_house_1_year_ago                category
-migration_prev_res_in_sunbelt                category
-num_persons_worked_for_employer                 int64
-family_member_under_18                       category
-country_of_birth_father                      category
-country_of_birth_mother                      category
-country_of_birth_self                        category
-citizenship                                  category
-own_business_or_self_employed                category
-fill_inc_questionnaire_for_veterans_admin    category
-veteran_benefits                             category
-weeks_worked_in_years                        category
-year                                         category
-label                                        category
+FEATURE NAME                                 FEATURE TYPE                                 DISTINCT VALUE COUNT  
+age                                          int64                                        continuous 
+class_of_work                                category                                     9
+industry_code                                category                                     52
+occupation_code                              category                                     47
+education                                    category                                     17
+wage_per_hour                                int64                                        continous
+enrolled_in_edu_inst_last_wk                 category                                     3
+marital_status                               category                                     7
+major_industry_code                          category                                     24
+major_occupation_code                        category                                     15
+race                                         category                                     5
+hispanic_origin                              category                                     10
+sex                                          category                                     2
+member_of_labor_union                        category                                     3
+reason_for_unemployment                      category                                     6
+full_or_part_time_employment_stat            category                                     8
+capital_gains                                int64                                        continous
+capital_losses                               int64                                        continous
+dividends_from_stocks                        int64                                        continous
+tax_filer_status                             category                                     6
+region of previous residence                 category                                     6
+state_of_previous_residence                  category                                     51 (708 Unknown Value)
+detailed_household_and_family_stat           category                                     38
+detailed_household_summary_in_household      category                                     8
+instance_weight                              float64                                      continous
+migration_code_change_in_msa                 category                                     10 (99696 Unknown Value)
+migration_code_change_in_reg                 category                                     9  (99696 Unknown Value)
+migration_code_move_within_reg               category                                     10 (99696 Unknown Value)
+live_in_this_house_1_year_ago                category                                     3
+migration_prev_res_in_sunbelt                category                                     4  (99696 Unknown Value)
+num_persons_worked_for_employer              int64                                        continous
+family_member_under_18                       category                                     5
+country_of_birth_father                      category                                     43 (6713 Unknown Value)
+country_of_birth_mother                      category                                     43 (6119 Unknown Value)
+country_of_birth_self                        category                                     43 (3393 Unknown Value)
+citizenship                                  category                                     5
+own_business_or_self_employed                category                                     3
+fill_inc_questionnaire_for_veterans_admin    category                                     3
+veteran_benefits                             category                                     3
+weeks_worked_in_years                        category                                     53
+year                                         category                                     2
+label                                        category                                     2
 ```  
 
 Bir sürü graph
