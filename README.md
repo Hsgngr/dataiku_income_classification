@@ -39,7 +39,7 @@ The train and test data was split in approximately 2/3, 1/3 proportions.
 - 50K :           187141      93576      
 + 50K :           12382       6186        
 ```
-However there is a huge imbalance between the labels. Most of the people (93%) who contributed to this survey has lower income than 50K. Therefore even if we predict all of the test data as - 50K we will reach %93 accuracy. Therefore accuracy is not a good measurement metric for this problem.
+However there is a huge imbalance between the labels. Most of the people (93%) who contributed to this survey has lower income than 50K. Even if we predict all of the test data as - 50K we will reach %93 accuracy. Therefore accuracy is not a good measurement metric for this problem.
 
 
 The other first thing was understanding what is **Not in Universe** means because most of the features have it. It implies that the person was not a part of the population to which the question was directed. 
