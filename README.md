@@ -32,7 +32,6 @@ taxable income amount
 
 **Note: Instance weight is not shown on the information.txt but it is in the data as the 24th column.
 ```
-Due to this error on the census_income_metadata.txt I had to spare sometime for understanding each feature and checking it with the data that I have. Turns out 'instance-weight' feauture is part of the data.csv but not shown on the text file.
 
 The train and test data was split in approximately 2/3, 1/3 proportions. 
 ```              
