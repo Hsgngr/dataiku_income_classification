@@ -88,7 +88,7 @@ fill_inc_questionnaire_for_veterans_admin    category
 veteran_benefits                             category
 weeks_worked_in_years                        category
 year                                         category
-y                                            category
+label                                        category
 ```  
 
 Bir sürü graph
