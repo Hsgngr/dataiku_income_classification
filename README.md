@@ -25,11 +25,15 @@ The first thing I noticed in the given Census data some of the columns are missi
 ```
 adjusted gross income
 federal income tax liability
-instance weight
+**instance weight**
 total person earnings
 total person income
 taxable income amount
+
+**Note: Instance weight is not shown on the information.txt but it is in the data as the 24th column.
 ```
+Due to this error on the census_income_metadata.txt I had sometime understanding each feature and checking comparing it with the data that I have. Turns out 'instance-weight' feauture is part of the data.csv but not shown on the data.
+
 The other first thing was understanding what is **Not in Universe** means because most of the features have it. It implies that the person was not a part of the population to which the question was directed. 
 
 Bir sürü graph
