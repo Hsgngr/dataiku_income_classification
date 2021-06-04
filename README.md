@@ -43,9 +43,57 @@ However there is a huge imbalance between the labels. Most of the people (93%) w
 
 
 The other first thing was understanding what is **Not in Universe** means because most of the features have it. It implies that the person was not a part of the population to which the question was directed. 
+ There are 42 features in total, 35 nominal, 8 continuous including the label column. Here is the full list of features:
+
+```  
+FEATURE NAME                             FEATURE TYPE 
+age                                             int64
+class_of_work                                category
+industry_code                                category
+occupation_code                              category
+education                                    category
+wage_per_hour                                   int64
+enrolled_in_edu_inst_last_wk                 category
+marital_status                               category
+major_industry_code                          category
+major_occupation_code                        category
+race                                         category
+hispanic_origin                              category
+sex                                          category
+member_of_labor_union                        category
+reason_for_unemployment                      category
+full_or_part_time_employment_stat            category
+capital_gains                                   int64
+capital_losses                                  int64
+dividends_from_stocks                           int64
+tax_filer_status                             category
+region of previous residence                 category
+state_of_previous_residence                  category
+detailed_household_and_family_stat           category
+detailed_household_summary_in_household      category
+instance_weightt                              float64
+migration_code_change_in_msa                 category
+migration_code_change_in_reg                 category
+migration_code_move_within_reg               category
+live_in_this_house_1_year_ago                category
+migration_prev_res_in_sunbelt                category
+num_persons_worked_for_employer                 int64
+family_member_under_18                       category
+country_of_birth_father                      category
+country_of_birth_mother                      category
+country_of_birth_self                        category
+citizenship                                  category
+own_business_or_self_employed                category
+fill_inc_questionnaire_for_veterans_admin    category
+veteran_benefits                             category
+weeks_worked_in_years                        category
+year                                         category
+y                                            category
+```  
 
 Bir sürü graph
 ## Data Preprocessing and Feature Engineering
+
 Bir sürü feature
 ## Data Modelling
 buraya Model summary() nasıl yaptığın
