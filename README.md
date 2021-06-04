@@ -90,6 +90,8 @@ weeks_worked_in_years                        category                           
 year                                         category                                     2
 label                                        category                                     2
 ```  
+![image](https://user-images.githubusercontent.com/32769732/120871759-686e1600-c551-11eb-8b2f-193159d23c7c.png) 
+
 
 Bir sürü graph
 ## Data Preprocessing and Feature Engineering
