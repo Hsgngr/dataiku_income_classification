@@ -98,7 +98,21 @@ for i in df.columns:
             break
     if temp == 0:
         print ("0")
+###############################################################################
+# This distribution plot shows the distribution of Age of people across the Data Set
+"plt.rcParams['figure.figsize'] = [8, 6]
+sns.set_style("white")
+fontsize= 16
 
+sns.distplot(df['age'], bins = 45, color = '#2ab1ac')
+plt.ylabel("Distribution", fontsize = fontsize)
+plt.xlabel("Age", fontsize = fontsize)
+plt.title('Distribution of Age', fontsize=fontsize + 4)
+plt.margins(x = 0)
+
+print ("The maximum age is", df['age'].max())
+print ("The minimum age is", df['age'].min())"
+###############################################################################
 #Try a RFC
 from sklearn.ensemble import RandomForestClassifier
 
