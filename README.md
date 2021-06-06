@@ -92,23 +92,27 @@ label                                        category                           
 ```  
 #### Let's compare training and test sets:
 
-When we plot the distribution of Census data by age, in both training and test data look very similar. This makes our task easier since the training and test domain will be same.
+1) When we plot the distribution of Census data by age, in both training and test data look very similar. This makes our task easier since the training and test domain will be same.
 
-1) ![image](https://user-images.githubusercontent.com/32769732/120931126-1f2edb00-c6a5-11eb-9a23-8f7b793e0c9e.png)
+![image](https://user-images.githubusercontent.com/32769732/120935774-35df2d00-c6b9-11eb-90b1-fd4b84c3bc6a.png)
 
-However there is an imbalance in between the datasets for the labels. Lets plot them:
+2) However there is an imbalance in between the datasets for the labels. Lets plot them:
 
-2) ![image](https://user-images.githubusercontent.com/32769732/120931636-5605f080-c6a7-11eb-98a1-c3743872af61.png)
+![image](https://user-images.githubusercontent.com/32769732/120935802-5b6c3680-c6b9-11eb-85d5-97bceef5dc7f.png)
 
 As preprocessing we should handle this imbalance data. Let's keep exploring the data and features:
 
-3) Here is the distribution of income with age
-![image](https://user-images.githubusercontent.com/32769732/120933354-a6348100-c6ae-11eb-9562-8c79877368de.png)
+3) Here is the distribution of Age by Income
+![image](https://user-images.githubusercontent.com/32769732/120935850-90788900-c6b9-11eb-91da-bd1f2238ed76.png)
 * On the above graph we can see the how less many people have income more than 50K compare to others as the graph shows the total count of people.
 * On the below graph, we see the density of both groups:
     * People from all age can have less income that 50K but only people who are older than 20 have more income than 50K. People with less income than 50K are slightly decreasing with the age.
     * People have more income than 50K has a normal distribution with a peak at 50.
-4) 
+4) Distribution of wealth between genders is as follows:
+![image](https://user-images.githubusercontent.com/32769732/120940768-c296e480-c6d3-11eb-9099-cd0b4535ffd9.png)
+In the dataset the ratio of men and women are not equal, there is a small difference. However the most significant thing is the wealthier men's percentage is 5 times more than wealthier women.
+5)
+
 
 
 
