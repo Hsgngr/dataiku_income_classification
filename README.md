@@ -90,7 +90,19 @@ weeks_worked_in_years                        category                           
 year                                         category                                     2
 label                                        category                                     2
 ```  
-![image](https://user-images.githubusercontent.com/32769732/120871759-686e1600-c551-11eb-8b2f-193159d23c7c.png) 
+#### Let's compare training and test sets:
+
+When we plot the distribution of Census data by age, in both training and test data look very similar. This makes our task easier since the training and test domain will be same.
+
+![image](https://user-images.githubusercontent.com/32769732/120931126-1f2edb00-c6a5-11eb-9a23-8f7b793e0c9e.png)
+
+However there is an imbalance in between the datasets for the labels. Lets plot them:
+
+![image](https://user-images.githubusercontent.com/32769732/120931636-5605f080-c6a7-11eb-98a1-c3743872af61.png)
+
+As preprocessing we should handle this imbalance data. Let's keep exploring the data and features:
+
+
 
 
 Bir sürü graph
