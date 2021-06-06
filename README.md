@@ -110,15 +110,15 @@ As preprocessing we should handle this imbalance data. Let's keep exploring the 
     * People have more income than 50K has a normal distribution with a peak at 50.
 4) Distribution of wealth between genders is as follows:
 ![image](https://user-images.githubusercontent.com/32769732/120940768-c296e480-c6d3-11eb-9099-cd0b4535ffd9.png)
-In the dataset the ratio of men and women are not equal, there is a small difference. However the most significant thing is the wealthier men's percentage is 5 times more than wealthier women.
-5)
 
+* In the dataset the ratio of men and women are not equal, there is a small difference. However the most significant thing is the wealthier men's percentage is 5 times more than wealthier women.
 
-
-
-
-Bir sürü graph
+Will add more
 ## Data Preprocessing and Feature Engineering
+I used my own library to extract feature importances for the task:
+![image](https://user-images.githubusercontent.com/32769732/120941836-e3623880-c6d9-11eb-9047-18158b1e0c64.png)
+These are the most important classes - subclasses. Instance weight is an interesting one because I'dont know anything about that task so first I will learn about that.
+
 
 Bir sürü feature
 ## Data Modelling
