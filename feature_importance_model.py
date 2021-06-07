@@ -66,7 +66,7 @@ y_pred = model.predict(X_test)
 y_pred = pd.DataFrame(y_pred)
 
 
-print(y_test.value_counts()[0] - y_pred.value_counts()[0], 'wrong predictions')
+print(abs(y_test.value_counts()[0] - y_pred.value_counts()[0]), 'wrong predictions')
 
 import joblib
 

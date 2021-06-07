@@ -68,7 +68,7 @@ df = census_data.rename(columns = column_names_dict)
 df_test = census_data_test.rename(columns = column_names_dict)
 ###############################################################################
 
-def categorize_columns(columns, df=df, label_encoding =False):
+def categorize_columns(df, columns, label_encoding =False):
     temp = df.copy()
     for column in columns:
         temp[column] = temp[column].astype('category')
@@ -80,10 +80,11 @@ def categorize_columns(columns, df=df, label_encoding =False):
 #Categorize nominal features:
 continuous_columns = ['age','wage_per_hour','capital_gains','capital_losses',
                       'dividends_from_stocks','num_persons_worked_for_employer',
-                      'instance_weight','weeks_worked_in_year','education']
+                      'instance_weight','weeks_worked_in_year',
+                      'education','detailed_household_and_family_stat']
 
 nominal_columns = list(set(df.columns) - set(continuous_columns))
-df_categorized = categorize_columns(nominal_columns)
+df_categorized = categorize_columns(df,nominal_columns)
 ###############################################################################
 # Find values with ? in it:
 for i in df.columns:
@@ -398,3 +399,5 @@ fig.show()
 plt.rcParams['figure.figsize'] = [16*2,9*2]
 corrMatrix = df.corr()
 sns.heatmap(corrMatrix, annot=True)
+
+model.score(X_train_removed,y_train)
