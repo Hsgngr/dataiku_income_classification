@@ -61,8 +61,8 @@ column_names_dict={
     41: 'y'    
     }
 
-df = census_data.head(10)
-df.rename(columns= column_names_dict, inplace =True)
+#df = census_data.head(10)
+#df.rename(columns= column_names_dict, inplace =True)
 
 df = census_data.rename(columns = column_names_dict)
 df_test = census_data_test.rename(columns = column_names_dict)

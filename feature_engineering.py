@@ -1,9 +1,64 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun Jun  6 23:55:15 2021
+Created on Mon Jun  7 10:23:44 2021
 
 @author: Ege
 """
+import pandas as pd
+import numpy as np
+
+census_data =  pd.read_csv('census_income_learn.csv', header=None)
+census_data_test =  pd.read_csv('census_income_test.csv', header=None)
+
+#Add the column names for each column
+column_names_dict={
+    0 : 'age',
+    1 : 'class_of_work',
+    2 : 'industry_code',
+    3 : 'occupation_code',
+    4 : 'education',
+    5 : 'wage_per_hour',
+    6 : 'enrolled_in_edu_inst_last_wk',
+    7 : 'marital_status',
+    8 : 'major_industry_code',
+    9: 'major_occupation_code',
+    10: 'race',
+    11: 'hispanic_origin',
+    12: 'sex',
+    13: 'member_of_labor_union',
+    14: 'reason_for_unemployment',
+    15: 'full_or_part_time_employment_stat',
+    16: 'capital_gains',
+    17: 'capital_losses',
+    18: 'dividends_from_stocks',
+    19: 'tax_filer_status',
+    20: 'region of previous residence',
+    21: 'state_of_previous_residence',
+    22: 'detailed_household_and_family_stat',
+    23: 'detailed_household_summary_in_household',
+    24: 'instance_weight',
+    25: 'migration_code_change_in_msa',
+    26: 'migration_code_change_in_reg',
+    27: 'migration_code_move_within_reg',
+    28: 'live_in_this_house_1_year_ago',
+    29: 'migration_prev_res_in_sunbelt',
+    30: 'num_persons_worked_for_employer',
+    31: 'family_member_under_18',
+    32: 'country_of_birth_father',
+    33: 'country_of_birth_mother',
+    34: 'country_of_birth_self',
+    35: 'citizenship',
+    36: 'own_business_or_self_employed',
+    37: 'fill_inc_questionnaire_for_veterans_admin',
+    38: 'veteran_benefits',
+    39: 'weeks_worked_in_years',
+    40: 'year',
+    41: 'y'    
+    }
+
+df = census_data.rename(columns = column_names_dict)
+df_test = census_data_test.rename(columns = column_names_dict)
+###############################################################################
 from sklearn import preprocessing
 
 le = preprocessing.LabelEncoder()
@@ -23,7 +78,7 @@ def categorize_columns(columns,train=df, test=df_test):
         temp_test[feat] = le.transform(temp_test[feat])
     return temp_train, temp_test
 
-X_train,X_test = categorize_columns(nominal_columns)
+X_train,X_test = categorize_columns(nominal_columns, train=df, test=df_test)
 ###############################################################################
 def categorize_education(df):
     temp= df.copy()
@@ -49,25 +104,10 @@ def categorize_education(df):
     temp['education'] = temp['education'].map(di).fillna(df['education'])
     return temp
 
-
-X_train,X_test = categorize_columns(nominal_columns)
-
 X_train = categorize_education(X_train)
-X_train = categorize_detailed_household(X_train,simple=False)
-y_train= X_train.pop('y')
-
 X_test = categorize_education(X_test)
-X_test = categorize_detailed_household(X_test, simple = False)
-y_test= X_test.pop('y')
 ###############################################################################
-#Create hasCapitalGains and hasCapitalLosses, hasDividends
-df['capital_gains'] > 0
-
-#!!!!!!Ayrı ayrı bunları categorize edemem train ile testi çünkü aynı label'ı verip vermediği belli değil.
-#Map Age as education
-###############################################################################
-
-def categorize_detailed_household(df, simple= False):
+def categorize_detailed_household(df):
     temp= df.copy()
     di2={
         ' Householder': 1,
@@ -114,90 +154,21 @@ def categorize_detailed_household(df, simple= False):
         ' In group quarters': 51,
         
         }
-    di2_simple={
-        ' Householder': 1,
-        ' Spouse of householder': 1,
-        
-        ' Child <18 never marr RP of subfamily': 2,
-        ' Child <18 never marr not in subfamily': 2,
-        ' Child <18 ever marr RP of subfamily': 2,
-        ' Child <18 spouse of subfamily RP': 2,
-        ' Child <18 ever marr not in subfamily': 2,
-        
-        ' Child 18+ ever marr RP of subfamily': 3,
-        ' Child 18+ never marr Not in a subfamily': 3,
-        ' Child 18+ never marr RP of subfamily' : 3,
-        ' Child 18+ spouse of subfamily RP': 3,
-        ' Child 18+ ever marr Not in a subfamily':3,
-        
-        ' Grandchild <18 never marr RP of subfamily': 4,
-        ' Grandchild <18 never marr child of subfamily RP':4,
-        ' Grandchild <18 never marr not in subfamily': 4,
-        ' Grandchild <18 ever marr RP of subfamily': 4,
-        ' Grandchild <18 ever marr not in subfamily': 4,
-        ' Grandchild 18+ never marr RP of subfamily': 4,
-        ' Grandchild 18+ never marr not in subfamily': 4,   
-        ' Grandchild 18+ ever marr RP of subfamily': 4,   
-        ' Grandchild 18+ spouse of subfamily RP': 4,
-        ' Grandchild 18+ ever marr not in subfamily':4,
-        
-        ' Other Rel <18 never married RP of subfamily': 5,
-        ' Other Rel <18 never marr child of subfamily RP': 5, 
-        ' Other Rel <18 never marr not in subfamily': 5,
-        ' Other Rel <18 ever marr RP of subfamily': 5,
-        ' Other Rel <18 spouse of subfamily RP': 5,
-        ' Other Rel <18 ever marr not in subfamily': 5,
-        ' Other Rel 18+ never marr RP of subfamily': 5,
-        ' Other Rel 18+ never marr not in subfamily': 5,
-        ' Other Rel 18+ ever marr RP of subfamily': 5,
-        ' Other Rel 18+ spouse of subfamily RP': 5,
-        ' Other Rel 18+ ever marr not in subfamily': 5,
-        ' RP of unrelated subfamily': 5,
-        ' Spouse of RP of unrelated subfamily': 5,
-        ' Child under 18 of RP of unrel subfamily': 5,
-        
-        ' Nonfamily householder': 6,
-        ' Secondary individual': 6,
-        ' In group quarters': 6,
-        
-        }
-    if simple == True:
-        temp['detailed_household_and_family_stat'] = temp['detailed_household_and_family_stat'].map(di2_simple).fillna(df['detailed_household_and_family_stat'])
-    else:
-        temp['detailed_household_and_family_stat'] = temp['detailed_household_and_family_stat'].map(di2).fillna(df['detailed_household_and_family_stat'])
+    temp['detailed_household_and_family_stat'] = temp['detailed_household_and_family_stat'].map(di2).fillna(df['detailed_household_and_family_stat'])
     return temp
 
-X_train = categorize_columns(df,nominal_columns, label_encoding=True)
-X_train = categorize_education(X_train)
-X_train = categorize_detailed_household(X_train,simple=False)
-y_train= X_train.pop('y')
+X_train =  categorize_detailed_household(X_train)
+X_test = categorize_detailed_household(X_test)
+###############################################################################
 
-
-X_test = categorize_columns(df_test,nominal_columns,label_encoding=True)
-X_test = categorize_education(X_test)
-X_test = categorize_detailed_household(X_test, simple = False)
-y_test= X_test.pop('y')
 
 ###############################################################################
-Imbalance ı tekrar dene
-
-Correlation matrixe bak y ile korrelasyon edenleri pdften çek categorizationını yap.
-Label encodingini düzelt.
-agei categorilize 42.sayfada pdfte
-
-continuous_columns = ['age','wage_per_hour','capital_gains','capital_losses',
-                      'dividends_from_stocks','num_persons_worked_for_employer',
-                      'instance_weight','weeks_worked_in_year']
-nominal_columns = list(set(df.columns) - set(continuous_columns))
-
-X_train,X_test = categorize_columns(nominal_columns, train=df, test=df_test)
-y_train= X_train.pop('y')
-y_test= X_test.pop('y')
-
+y_train = X_train.pop('y')
+y_test =  X_test.pop('y')
 
 model = RandomForestClassifier()
 model.fit(X_train,y_train)
-model.score(X_test,y_test)
+print('Score in test data:',model.score(X_test,y_test))
 y_pred = model.predict(X_test)
 y_pred = pd.DataFrame(y_pred)
 

@@ -4,7 +4,15 @@ Created on Sun Jun  6 22:33:18 2021
 
 @author: Ege
 """
+from sklearn import preprocessing
 from sklearn.utils import resample
+from sklearn.metrics import precision_score
+
+df = census_data.rename(columns = column_names_dict)
+df_test = census_data_test.rename(columns = column_names_dict)
+
+df['y'] = le.fit_transform(df['y'])
+df_test['y'] = le.fit_transform(df_test['y'])
 #Imbalance data
 # Separate majority and minority classes
 df_majority = df[df['y']==0]
@@ -13,23 +21,44 @@ df_minority = df[df['y']==1]
 # Downsample majority class
 df_majority_downsampled = resample(df_majority, 
                                  replace=False,    
-                                 n_samples=100000)
+                                 n_samples=150000)
 #Upsample minority class
 df_minority_upsampled = resample(df_minority, 
                                  replace=True,     
-                                 n_samples=30000)
+                                 n_samples=15000)
 # Combine minority class with downsampled majority class
 df_up_down_sampled = pd.concat([df_majority, df_minority_upsampled])
 
+df = df_up_down_sampled.copy()
+print(df.y.value_counts())
 
-df_up_down_sampled.y.value_counts()
+X_train,X_test = categorize_columns(nominal_columns, train=df, test=df_test)
+X_train = categorize_education(X_train)
+X_test = categorize_education(X_test)
+X_train =  categorize_detailed_household(X_train)
+X_test = categorize_detailed_household(X_test)
 
-X_train = categorize_columns(nominal_columns,df= df_up_down_sampled, label_encoding=True)
 y_train = X_train.pop('y')
+y_test =  X_test.pop('y')
 
+model = RandomForestClassifier()
+#model = RandomForestClassifier(n_estimators=1000, class_weight={0:0.10, 1:0.90})
 model.fit(X_train,y_train)
+print('Score in test data:',model.score(X_test,y_test))
+y_pred = model.predict(X_test)
+y_pred = pd.DataFrame(y_pred)
 
-model.score(X_test,y_test)
+precision_score(y_test, y_pred, average='binary')
+
+y_pred = model.predict(X_test)
+
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+
+print(confusion_matrix(y_test,y_pred))
+print(classification_report(y_test,y_pred))
+print(accuracy_score(y_test, y_pred))
+#print(abs(y_test.value_counts()[0] - y_pred.value_counts()[0]), 'wrong predictions')
+
 ###############################################################################
 # model used for feature importances
 #Optional Feature Selection
