@@ -61,10 +61,10 @@ df_test = census_data_test.rename(columns = column_names_dict)
 ###############################################################################
 from sklearn import preprocessing
 
-le = preprocessing.LabelEncoder()
+le = preprocessing.OneHotEncoder()
 continuous_columns = ['age','wage_per_hour','capital_gains','capital_losses',
                       'dividends_from_stocks','num_persons_worked_for_employer',
-                      'instance_weight','weeks_worked_in_year',
+                      'instance_weight','weeks_worked_in_years',
                       'education','detailed_household_and_family_stat']
 nominal_columns = list(set(df.columns) - set(continuous_columns))
 
@@ -79,6 +79,24 @@ def categorize_columns(columns,train=df, test=df_test):
     return temp_train, temp_test
 
 X_train,X_test = categorize_columns(nominal_columns, train=df, test=df_test)
+###############################################################################
+onehot = preprocessing.OneHotEncoder()
+
+def categorize_onehot_columns(columns, train=df, test=df_test):
+    temp_train = train.copy()
+    temp_test = test.copy()
+    
+    onehot = preprocessing.OneHotEncoder()      
+    onehot.fit(temp_train[nominal_columns])
+    
+    X_train_onehot=onehot.transform(temp_train[nominal_columns])
+    X_test_onehot=onehot.transform(temp_test[nominal_columns])
+    
+    pd.concat([X_train[continuous_columns],X_train_onehot])
+    
+    return X_train, X_test
+
+X_train, X_test = categorize_onehot_columns(nominal_columns, train=df, test= df_test)
 ###############################################################################
 def categorize_education(df):
     temp= df.copy()
@@ -101,7 +119,7 @@ def categorize_education(df):
         ' Prof school degree (MD DDS DVM LLB JD)': 15,
         ' Doctorate degree(PhD EdD)': 16,    
         }
-    temp['education'] = temp['education'].map(di).fillna(df['education'])
+    temp['education'] = temp['education'].map(di)
     return temp
 
 X_train = categorize_education(X_train)
@@ -154,15 +172,119 @@ def categorize_detailed_household(df):
         ' In group quarters': 51,
         
         }
-    temp['detailed_household_and_family_stat'] = temp['detailed_household_and_family_stat'].map(di2).fillna(df['detailed_household_and_family_stat'])
+    temp['detailed_household_and_family_stat'] = temp['detailed_household_and_family_stat'].map(di2)
     return temp
 
 X_train =  categorize_detailed_household(X_train)
 X_test = categorize_detailed_household(X_test)
 ###############################################################################
-
-
+#CLASS OF WORKER
+def categorize_class_of_work(df):
+    temp= df.copy()
+    di2={
+        ' Not in universe' : 0,
+        ' Private': 1,
+        ' Federal government': 2,
+        ' State government': 2,
+        ' Local government': 2,
+        ' Self-employed-incorporated': 3,
+        ' Self-employed-not incorporated': 3,
+        ' Without pay': 4,
+        ' Never worked': 4
+        }
+    temp['class_of_work'] = temp['class_of_work'].map(di2)
+    return temp
 ###############################################################################
+#AMARITL Marital Status
+def categorize_marital_status(df):
+    temp= df.copy()
+    di2={
+        ' Married-civilian spouse present' : 1,
+        ' Married-A F spouse present': 2,
+        ' Married-spouse absent': 3,
+        ' Widowed': 4,
+        ' Divorced': 5,
+        ' Separated': 6,
+        ' Never married':7,
+        }
+    temp['marital_status'] = temp['marital_status'].map(di2)
+    return temp
+###############################################################################
+#HasCapitalGain
+def hasCapital(df):
+    temp = df.copy()
+    temp.loc[temp['capital_gains'] >0, 'hasCapitalGains']= 1
+    temp.loc[temp['capital_gains'] == 0, 'hasCapitalGains']= 0
+    
+    temp.loc[temp['capital_losses'] >0, 'hasCapitalLosses']= 1
+    temp.loc[temp['capital_losses'] == 0, 'hasCapitalLosses']= 0
+    
+    temp.loc[temp['dividends_from_stocks'] >0, 'hasStock']= 1
+    temp.loc[temp['dividends_from_stocks'] == 0, 'hasStock']= 0
+    
+    return temp
+###############################################################################
+#Citizenship
+def categorize_citizen(df):
+    temp = df.copy()
+    citizen_mapping = {
+        " Native- Born in the United States": 1,
+        ' Foreign born- Not a citizen of U S ': 5,
+        " Foreign born- U S citizen by naturalization": 4,
+        " Native- Born abroad of American Parent(s)": 3,
+        " Native- Born in Puerto Rico or U S Outlying": 2
+        }
+    native_mapping = {
+        " Native- Born in the United States": 1,
+        ' Foreign born- Not a citizen of U S ': 2,
+        " Foreign born- U S citizen by naturalization": 2,
+        " Native- Born abroad of American Parent(s)": 1,
+        " Native- Born in Puerto Rico or U S Outlying": 1
+        }
+    
+    temp['isNative']= temp['citizenship'].map(native_mapping)
+    temp['citizenship'] = temp['citizenship'].map(citizen_mapping)
+    
+    return temp
+
+
+    
+###############################################################################
+continuous_columns = ['age','wage_per_hour','capital_gains','capital_losses',
+                      'dividends_from_stocks','num_persons_worked_for_employer',
+                      'instance_weight','weeks_worked_in_years',
+                      'education','detailed_household_and_family_stat','class_of_work',
+                      'marital_status','citizenship']
+nominal_columns = list(set(df.columns) - set(continuous_columns))
+
+def preprocess_data(df,df_test):
+    X_train,X_test = categorize_columns(nominal_columns, train=df, test=df_test)
+    
+    X_train = categorize_education(X_train)
+    X_test = categorize_education(X_test)
+    
+    X_train =  categorize_detailed_household(X_train)
+    X_test = categorize_detailed_household(X_test)
+    
+    X_train = categorize_class_of_work(X_train)
+    X_test = categorize_class_of_work(X_test)
+    
+    X_train = categorize_marital_status(X_train)
+    X_test = categorize_marital_status(X_test)
+    
+    X_train = hasCapital(X_train)
+    X_test = hasCapital(X_test)
+    
+    X_train = categorize_citizen(X_train)
+    X_test = categorize_citizen(X_test)
+    
+    return X_train, X_test
+###############################################################################
+
+
+from sklearn.ensemble import RandomForestClassifier
+
+X_train,X_test = preprocess_data(df,df_test)
 y_train = X_train.pop('y')
 y_test =  X_test.pop('y')
 
@@ -172,4 +294,9 @@ print('Score in test data:',model.score(X_test,y_test))
 y_pred = model.predict(X_test)
 y_pred = pd.DataFrame(y_pred)
 
-print(abs(y_test.value_counts()[0] - y_pred.value_counts()[0]), 'wrong predictions')
+
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+
+print(confusion_matrix(y_test,y_pred))
+print(classification_report(y_test,y_pred))
+print(accuracy_score(y_test, y_pred))
