@@ -80,7 +80,7 @@ def categorize_columns(columns, df=df, label_encoding =False):
 #Categorize nominal features:
 continuous_columns = ['age','wage_per_hour','capital_gains','capital_losses',
                       'dividends_from_stocks','num_persons_worked_for_employer',
-                      'instance_weight','weeks_worked_in_year']
+                      'instance_weight','weeks_worked_in_year','education']
 
 nominal_columns = list(set(df.columns) - set(continuous_columns))
 df_categorized = categorize_columns(nominal_columns)
@@ -123,11 +123,11 @@ X_test = categorize_columns(nominal_columns, df =df_test, label_encoding = True)
 y_test = X_test.pop('y')
 
 model = RandomForestClassifier(n_estimators=1000, class_weight={0:0.10, 1:0.90})
-
+model = RandomForestClassifier()
 model.fit(X_train,y_train)
-#y_pred = model.predict(X_test)
 
 model.score(X_test,y_test)
+y_pred = model.predict(X_test)
 
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 
@@ -387,14 +387,14 @@ ax[1].set_xlabel('Sex')
 ax[0].legend()
 ################################################################################
 #AGE PLOT
-plt.scatter(df['instance_weight'],df['y'])
+plt.plot(df['age'],df['veteran_benefits'])
 
 df_sampled = resample(df,replace=False,n_samples=100000)
 
-fig = px.scatter_3d(df_sampled, x='capital_gains', y='age', z='y',
+fig = px.scatter_3d(df_sampled, x='age', y='veteran_benefits', z='y',
                     color='y')
 fig.show()
 
-plt.rcParams['figure.figsize'] = [1,1]
+plt.rcParams['figure.figsize'] = [16*2,9*2]
 corrMatrix = df.corr()
 sns.heatmap(corrMatrix, annot=True)

@@ -128,3 +128,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 *.csv
+model/rfc_model_1000_class_weight1_9.pkl
