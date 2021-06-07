@@ -46,7 +46,7 @@ df['capital_gains'] > 0
 #Map Age as education
 ###############################################################################
 
-def categorize_detailed_household(df):
+def categorize_detailed_household(df, simple= False):
     temp= df.copy()
     di2={
         ' Householder': 1,
@@ -93,14 +93,73 @@ def categorize_detailed_household(df):
         ' In group quarters': 51,
         
         }
-    temp['detailed_household_and_family_stat'] = temp['detailed_household_and_family_stat'].map(di2).fillna(df['detailed_household_and_family_stat'])
+    di2_simple={
+        ' Householder': 1,
+        ' Spouse of householder': 1,
+        
+        ' Child <18 never marr RP of subfamily': 2,
+        ' Child <18 never marr not in subfamily': 2,
+        ' Child <18 ever marr RP of subfamily': 2,
+        ' Child <18 spouse of subfamily RP': 2,
+        ' Child <18 ever marr not in subfamily': 2,
+        
+        ' Child 18+ ever marr RP of subfamily': 3,
+        ' Child 18+ never marr Not in a subfamily': 3,
+        ' Child 18+ never marr RP of subfamily' : 3,
+        ' Child 18+ spouse of subfamily RP': 3,
+        ' Child 18+ ever marr Not in a subfamily':3,
+        
+        ' Grandchild <18 never marr RP of subfamily': 4,
+        ' Grandchild <18 never marr child of subfamily RP':4,
+        ' Grandchild <18 never marr not in subfamily': 4,
+        ' Grandchild <18 ever marr RP of subfamily': 4,
+        ' Grandchild <18 ever marr not in subfamily': 4,
+        ' Grandchild 18+ never marr RP of subfamily': 4,
+        ' Grandchild 18+ never marr not in subfamily': 4,   
+        ' Grandchild 18+ ever marr RP of subfamily': 4,   
+        ' Grandchild 18+ spouse of subfamily RP': 4,
+        ' Grandchild 18+ ever marr not in subfamily':4,
+        
+        ' Other Rel <18 never married RP of subfamily': 5,
+        ' Other Rel <18 never marr child of subfamily RP': 5, 
+        ' Other Rel <18 never marr not in subfamily': 5,
+        ' Other Rel <18 ever marr RP of subfamily': 5,
+        ' Other Rel <18 spouse of subfamily RP': 5,
+        ' Other Rel <18 ever marr not in subfamily': 5,
+        ' Other Rel 18+ never marr RP of subfamily': 5,
+        ' Other Rel 18+ never marr not in subfamily': 5,
+        ' Other Rel 18+ ever marr RP of subfamily': 5,
+        ' Other Rel 18+ spouse of subfamily RP': 5,
+        ' Other Rel 18+ ever marr not in subfamily': 5,
+        ' RP of unrelated subfamily': 5,
+        ' Spouse of RP of unrelated subfamily': 5,
+        ' Child under 18 of RP of unrel subfamily': 5,
+        
+        ' Nonfamily householder': 6,
+        ' Secondary individual': 6,
+        ' In group quarters': 6,
+        
+        }
+    if simple == True:
+        temp['detailed_household_and_family_stat'] = temp['detailed_household_and_family_stat'].map(di2_simple).fillna(df['detailed_household_and_family_stat'])
+    else:
+        temp['detailed_household_and_family_stat'] = temp['detailed_household_and_family_stat'].map(di2).fillna(df['detailed_household_and_family_stat'])
     return temp
 
 X_train = categorize_columns(df,nominal_columns, label_encoding=True)
 X_train = categorize_education(X_train)
+X_train = categorize_detailed_household(X_train,simple=False)
 y_train= X_train.pop('y')
 
 
 X_test = categorize_columns(df_test,nominal_columns,label_encoding=True)
 X_test = categorize_education(X_test)
+X_test = categorize_detailed_household(X_test, simple = False)
 y_test= X_test.pop('y')
+
+###############################################################################
+Imbalance ı tekrar dene
+
+Correlation matrixe bak y ile korrelasyon edenleri pdften çek categorizationını yap.
+Label encodingini düzelt.
+agei categorilize 42.sayfada pdfte
