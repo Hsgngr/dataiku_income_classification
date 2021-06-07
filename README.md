@@ -117,7 +117,8 @@ Will add more
 ## Data Preprocessing and Feature Engineering
 I used my own library to extract feature importances for the task:
 ![image](https://user-images.githubusercontent.com/32769732/120941836-e3623880-c6d9-11eb-9047-18158b1e0c64.png)
-These are the most important classes - subclasses. Instance weight is an interesting one because I'dont know anything about that task so first I will learn about that.
+These are the most important classes - subclasses. Instance weight is an interesting one because I'dont know anything about that task so first I will learn about that. Also let's plot the correlation matrix:
+![image](https://user-images.githubusercontent.com/32769732/120942495-2d4d1d80-c6de-11eb-8d30-644df2af7212.png)
 
 
 Bir sürü feature
