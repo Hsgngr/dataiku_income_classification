@@ -19,7 +19,8 @@ This repository aims to explain the process of how I handled the project. Since 
 * `clean_main.py` is the main python script.
 * `feature_engineering_clean.py` is the class that I created for preprocessing the data. It is imported in the `clean_main.py`. 
 * Presentation can be found as `"Task Presentation.pptx"`
-* Also the `eda.py` and `eda_2.py` are for exploratory data analysis (they can be a little messy). 
+* `eda.py` and `eda_2.py` are for exploratory data analysis (they can be a little messy). 
+* `feature_selector` is a generic library that I use in classification problems such as this.
 * Other experiments are in the folder `/trials`
 
 
