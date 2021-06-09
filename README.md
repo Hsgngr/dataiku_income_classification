@@ -17,6 +17,11 @@ This repository outlines my approach to the Dataiku's Data Science Task. To goal
 
 This repository aims to explain the process of how I handled the project. Since the task has also a presentation part, I will keep this repository as technical as possible. Then I will filter my findings out and create more representable insights for my non-technical audience.
 
+`clean_main.py` is the main python script.
+`feature_engineering_clean.py` is the class that I created for preprocessing the data. It is imported in the `clean_main.py`. Also the
+`eda.py` and `eda_2.py` are for exploratory data analysis (they can be a little messy). Other experiments are in the folder `\trials`
+
+
 
 
 ## Exploratory Data Analysis
@@ -123,10 +128,11 @@ These are the most important classes - subclasses. Instance weight is an interes
 
 Bir sürü feature
 ## Data Modelling
-buraya Model summary() nasıl yaptığın
-## Model Assessment
-buraya işte precision accuracy roc, f1 graphlerini koy.
+![image](https://user-images.githubusercontent.com/32769732/121442435-89af7780-c940-11eb-8103-cf302996d67a.png)
 ## Results
-buraya sonuç ne, feature importance (rfc çalışırsa)
+![image](https://user-images.githubusercontent.com/32769732/121442442-8e742b80-c940-11eb-9089-640922d076cc.png)
+![image](https://user-images.githubusercontent.com/32769732/121442408-7d2b1f00-c940-11eb-8684-32836d2f8051.png)
+
+Accuracy= 0.96
 
 
