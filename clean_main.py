@@ -14,14 +14,7 @@ from sklearn.linear_model import LogisticRegression
 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import GradientBoostingClassifier
-
-
-
-
 from sklearn.ensemble import StackingClassifier
-
-
-
 import lightgbm as lgb
 
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
@@ -50,9 +43,9 @@ model6 = lgb.LGBMClassifier()
 estimators= [('tr',model1), ('kn', model2), ('rfc_1000',model8),('rfc',model4), ('gbc', model5), ('lgb',model6)]
 
 stacked_model = StackingClassifier(estimators=estimators, final_estimator=LogisticRegression())
-stacked_model.fit(X_train,y_train)
+stacked_model.fit(X_train_r,y_train)
 
-y_pred = stacked_model.predict(X_test)
+y_pred = stacked_model.predict(X_test_r)
 
 print(confusion_matrix(y_test,y_pred))
 print(classification_report(y_test,y_pred))
