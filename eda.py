@@ -419,8 +419,13 @@ fig = px.scatter_3d(df_sampled, x='age', y='veteran_benefits', z='y',
                     color='y')
 fig.show()
 
-plt.rcParams['figure.figsize'] = [16*2,9*2]
-corrMatrix = df.corr()
+df_corr= X_train.copy()
+df_corr['y'] = y_train
+###############################################################################
+#Correlation HeatMap
+
+plt.rcParams['figure.figsize'] = [16*3,9*3]
+corrMatrix = df_corr.corr()
 sns.heatmap(corrMatrix, annot=True)
 
-model.score(X_train_removed,y_train)
+
