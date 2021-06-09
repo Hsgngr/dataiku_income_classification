@@ -61,7 +61,7 @@ df_test = census_data_test.rename(columns = column_names_dict)
 ###############################################################################
 from sklearn import preprocessing
 
-le = preprocessing.OneHotEncoder()
+le = preprocessing.LabelEncoder()
 continuous_columns = ['age','wage_per_hour','capital_gains','capital_losses',
                       'dividends_from_stocks','num_persons_worked_for_employer',
                       'instance_weight','weeks_worked_in_years',
@@ -246,15 +246,53 @@ def categorize_citizen(df):
     temp['citizenship'] = temp['citizenship'].map(citizen_mapping)
     
     return temp
+    
+###############################################################################
+# Detailed_household_summary_in_household
 
+def categorize_detailed_household_summary(df):
+    temp = df.copy()
+    hdi = {
+        " Householder": 1,
+        ' Spouse of householder': 2,
+        " Child under 18 never married": 3,
+        " Child under 18 ever married": 4,
+        " Child 18 or older": 5,
+        " Other relative of householder" : 6,
+        " Nonrelative of householder" : 7,
+        " Group Quarters- Secondary individual" : 8,
+        }
 
     
+    temp['detailed_household_summary_in_household']= temp['detailed_household_summary_in_household'].map(hdi)
+    
+    return temp
+###############################################################################  
+#Normalize column
+from sklearn import preprocessing
+def normalize_column(column, train, test):
+    temp_train= train.copy()
+    temp_test = test.copy()
+    
+    train_values= temp_train[column].values.reshape(-1, 1)
+    test_values = temp_test[column].values.reshape(-1, 1)
+    
+    min_max_scaler = preprocessing.MinMaxScaler()
+    
+    train_values_normalized = min_max_scaler.fit_transform(train_values)
+    test_values_normalized = min_max_scaler.transform(test_values)
+    
+    
+    temp_train[column] = train_values_normalized
+    temp_test[column] = test_values_normalized
+    return temp_train,temp_test  
+  
 ###############################################################################
 continuous_columns = ['age','wage_per_hour','capital_gains','capital_losses',
                       'dividends_from_stocks','num_persons_worked_for_employer',
                       'instance_weight','weeks_worked_in_years',
                       'education','detailed_household_and_family_stat','class_of_work',
-                      'marital_status','citizenship']
+                      'marital_status','citizenship','detailed_household_summary_in_household']
 nominal_columns = list(set(df.columns) - set(continuous_columns))
 
 def preprocess_data(df,df_test):
@@ -278,6 +316,11 @@ def preprocess_data(df,df_test):
     X_train = categorize_citizen(X_train)
     X_test = categorize_citizen(X_test)
     
+    X_train =categorize_detailed_household_summary(X_train)
+    X_test  =categorize_detailed_household_summary(X_test)
+    
+    X_train,X_test = normalize_column('instance_weight',X_train, X_test)
+    
     return X_train, X_test
 ###############################################################################
 
@@ -300,3 +343,11 @@ from sklearn.metrics import classification_report, confusion_matrix, accuracy_sc
 print(confusion_matrix(y_test,y_pred))
 print(classification_report(y_test,y_pred))
 print(accuracy_score(y_test, y_pred))
+###############################################################################
+import joblib
+
+joblib.dump(X_train,'X_train.pkl')
+joblib.dump(y_train,'y_train.pkl')
+
+joblib.dump(X_test,'X_test.pkl')
+joblib.dump(y_test,'y_test.pkl')
