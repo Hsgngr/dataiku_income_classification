@@ -61,12 +61,12 @@ df_test = census_data_test.rename(columns = column_names_dict)
 ###############################################################################
 from sklearn import preprocessing
 
-le = preprocessing.LabelEncoder()
-continuous_columns = ['age','wage_per_hour','capital_gains','capital_losses',
-                      'dividends_from_stocks','num_persons_worked_for_employer',
-                      'instance_weight','weeks_worked_in_years',
-                      'education','detailed_household_and_family_stat']
-nominal_columns = list(set(df.columns) - set(continuous_columns))
+#le = preprocessing.LabelEncoder()
+#continuous_columns = ['age','wage_per_hour','capital_gains','capital_losses',
+#                      'dividends_from_stocks','num_persons_worked_for_employer',
+#                      'instance_weight','weeks_worked_in_years',
+#                      'education','detailed_household_and_family_stat']
+#nominal_columns = list(set(df.columns) - set(continuous_columns))
 
 def categorize_columns(columns,train=df, test=df_test):
     le = preprocessing.LabelEncoder()
@@ -78,25 +78,7 @@ def categorize_columns(columns,train=df, test=df_test):
         temp_test[feat] = le.transform(temp_test[feat])
     return temp_train, temp_test
 
-X_train,X_test = categorize_columns(nominal_columns, train=df, test=df_test)
-###############################################################################
-onehot = preprocessing.OneHotEncoder()
-
-def categorize_onehot_columns(columns, train=df, test=df_test):
-    temp_train = train.copy()
-    temp_test = test.copy()
-    
-    onehot = preprocessing.OneHotEncoder()      
-    onehot.fit(temp_train[nominal_columns])
-    
-    X_train_onehot=onehot.transform(temp_train[nominal_columns])
-    X_test_onehot=onehot.transform(temp_test[nominal_columns])
-    
-    pd.concat([X_train[continuous_columns],X_train_onehot])
-    
-    return X_train, X_test
-
-X_train, X_test = categorize_onehot_columns(nominal_columns, train=df, test= df_test)
+#X_train,X_test = categorize_columns(nominal_columns, train=df, test=df_test)
 ###############################################################################
 def categorize_education(df):
     temp= df.copy()
@@ -122,8 +104,8 @@ def categorize_education(df):
     temp['education'] = temp['education'].map(di)
     return temp
 
-X_train = categorize_education(X_train)
-X_test = categorize_education(X_test)
+#X_train = categorize_education(X_train)
+#X_test = categorize_education(X_test)
 ###############################################################################
 def categorize_detailed_household(df):
     temp= df.copy()
@@ -175,8 +157,8 @@ def categorize_detailed_household(df):
     temp['detailed_household_and_family_stat'] = temp['detailed_household_and_family_stat'].map(di2)
     return temp
 
-X_train =  categorize_detailed_household(X_train)
-X_test = categorize_detailed_household(X_test)
+#X_train =  categorize_detailed_household(X_train)
+#X_test = categorize_detailed_household(X_test)
 ###############################################################################
 #CLASS OF WORKER
 def categorize_class_of_work(df):
