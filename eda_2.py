@@ -163,3 +163,58 @@ fig, ax = plt.subplots(figsize = (10,12))
 sns_grad = sns.barplot(x = X_train['marital_status'], y = X_train['y'], data = X_train, ax=ax)
 ax.set_xticklabels(list(di2.keys()), rotation=90)
 
+###############################################################################
+#Marital Status VS Income
+X_train['y'] = X_train['y'].astype('category').cat.codes
+
+di2={
+        ' Married-civilian spouse present' : 1,
+        ' Married-A F spouse present': 2,
+        ' Married-spouse absent': 3,
+        ' Widowed': 4,
+        ' Divorced': 5,
+        ' Separated': 6,
+        ' Never married':7,
+        }
+
+sns.set(style = 'whitegrid')
+fig, ax = plt.subplots(figsize = (10,12))
+sns_grad = sns.barplot(x = X_train['race'], y = X_train['y'], data = X_train, ax=ax)
+ax.set_xticklabels(list(di2.keys()), rotation=90)
+###############################################################################
+#Major Industry Code
+X_train['y'] = X_train['y'].astype('category').cat.codes
+
+di2={
+        ' Married-civilian spouse present' : 1,
+        ' Married-A F spouse present': 2,
+        ' Married-spouse absent': 3,
+        ' Widowed': 4,
+        ' Divorced': 5,
+        ' Separated': 6,
+        ' Never married':7,
+        }
+
+sns.set(style = 'whitegrid')
+fig, ax = plt.subplots(figsize = (10,12))
+sns_grad = sns.barplot(x = df_rich['race'], y = df_rich['y'], data = df_rich, ax=ax)
+
+###############################################################################
+fig, ax = plt.subplots(figsize = (10,12))
+
+race = ['White','Black','Asian or Pacific Islander','Other','Amer Indian Aluet or Eskimo']
+
+sns.histplot(df_rich['race'], stat= 'count', ax= ax)
+ax.set_xticklabels( rotation=90)
+ax.set_title()
+
+
+df_rich['race'].value_counts()
+
+###############################################################################
+df['y'] = df['y'].astype('category').cat.codes
+sns.set(style = 'whitegrid')
+fig, ax = plt.subplots(figsize = (10,12))
+sns_grad = sns.barplot(x = df['race'], y = df['y'], data = df, ax=ax)
+race = ['White','Asian or Pacific Islander', 'Amer Indian Aluet or Eskimo', 'Black', 'Other']
+ax.set_xticklabels(race,rotation=90)

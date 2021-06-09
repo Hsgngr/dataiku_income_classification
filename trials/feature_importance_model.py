@@ -13,6 +13,9 @@ df_test = census_data_test.rename(columns = column_names_dict)
 
 df['y'] = le.fit_transform(df['y'])
 df_test['y'] = le.fit_transform(df_test['y'])
+
+#df['y'] = y_train
+#df_test['y'] = y_test
 #Imbalance data
 # Separate majority and minority classes
 df_majority = df[df['y']==0]
@@ -21,13 +24,13 @@ df_minority = df[df['y']==1]
 # Downsample majority class
 df_majority_downsampled = resample(df_majority, 
                                  replace=False,    
-                                 n_samples=150000)
+                                 n_samples=15000)
 #Upsample minority class
 df_minority_upsampled = resample(df_minority, 
                                  replace=True,     
                                  n_samples=15000)
 # Combine minority class with downsampled majority class
-df_up_down_sampled = pd.concat([df_majority, df_minority_upsampled])
+df_up_down_sampled = pd.concat([df_majority_downsampled, df_minority_upsampled])
 
 df = df_up_down_sampled.copy()
 print(df.y.value_counts())
@@ -79,11 +82,11 @@ zero_importance_features = fs.ops['zero_importance']
 # plot the feature importances
 fs.plot_feature_importances(threshold = 0., plot_n = 20)
 
-fs.identify_low_importance(cumulative_importance = 0.99)
+fs.identify_low_importance(cumulative_importance = 0.90)
 
 # Remove the features from all methods (returns a df)
 X_train_removed = fs.remove(methods = 'all')
-X_train_removed, X_test = X_train_removed.align(X_test, axis=1, join='inner')
+X_train_removed, X_test_removed = X_train_removed.align(X_test, axis=1, join='inner')
 
 model.fit(X_train_removed,y_train)
 model.score(X_test,y_test)
