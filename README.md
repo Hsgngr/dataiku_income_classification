@@ -17,9 +17,11 @@ This repository outlines my approach to the Dataiku's Data Science Task. To goal
 
 This repository aims to explain the process of how I handled the project. Since the task has also a presentation part, I will keep this repository as technical as possible. Then I will filter my findings out and create more representable insights for my non-technical audience.
 
-`clean_main.py` is the main python script.
-`feature_engineering_clean.py` is the class that I created for preprocessing the data. It is imported in the `clean_main.py`. Also the
-`eda.py` and `eda_2.py` are for exploratory data analysis (they can be a little messy). Other experiments are in the folder `\trials`
+* `clean_main.py` is the main python script.
+* `feature_engineering_clean.py` is the class that I created for preprocessing the data. It is imported in the `clean_main.py`. 
+* Presentation can be found as `"Task Presentation.pptx"`
+* Also the `eda.py` and `eda_2.py` are for exploratory data analysis (they can be a little messy). 
+* Other experiments are in the folder `/trials`
 
 
 
