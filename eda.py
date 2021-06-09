@@ -197,15 +197,25 @@ print('LightGBM Model accuracy score: {0:0.4f}'.format(accuracy_score(y_test, y_
 import tensorflow as tf
 
 model = tf.keras.Sequential([
-    tf.keras.layers.Dense(256, activation='relu'),
-    tf.keras.layers.Dense(256, activation='relu'),
+    tf.keras.layers.Dense(512, activation='relu'),
+    
+    tf.keras.layers.Dense(64, activation='relu'),
     tf.keras.layers.Dense(1,activation='sigmoid')
 ])
 
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
-model.fit(X_train,y_train,validation_split=0.2, epochs=10)
 
+model.fit(X_train,y_train,validation_split=0.25, epochs=50)
+y_pred = model.predict(X_test)
+
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+
+print(confusion_matrix(y_test,y_pred))
+print(classification_report(y_test,y_pred))
+print(accuracy_score(y_test, y_pred))
+
+model.summary()
 ###############################################################################
 full_data = [df, df_test]
 
@@ -321,6 +331,19 @@ sns.histplot(df_more['age'], bins = 30, color = '#FFA156', ax= ax[1], stat = 'de
 ax[0].set_xlabel('')
 ax[1].set_xlabel('AGE')
 ax[0].legend()
+###############################################################################
+#NUM persons worked
+plt.rcParams['figure.figsize'] = [20, 8]
+plt.rc('font',size = 20)
+fig, ax = plt.subplots()
+fig.suptitle('Distribution of Age by Income', fontsize= 30)
+
+sns.set(font_scale=1.5)
+sns.set_style("whitegrid")
+sns.set_style('whitegrid',{'axes.grid':True})
+
+sns.histplot(df['num_persons_worked_for_employer'], bins = 30, color = '#FFA156', hue='y', ax= ax, label='More than 50K',multiple="stack")
+sns.histplot(df_less['num_persons_worked_for_employer'], bins = 30, color = '#609BC7', ax= ax,stat= 'count', label='Less than 50K',multiple="stack",) 
 
 ###############################################################################
 df['y'] = df['y'].astype('category').cat.codes
