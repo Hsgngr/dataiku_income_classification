@@ -10,7 +10,6 @@ This repository outlines my approach to the Dataiku's Data Science Task. To goal
 - [Exploratory Data Analysis](#exploratory-data-analysis)
 - [Data Preprocessing and Feature Engineering](#data-preprocessing-and-feature-engineering)
 - [Data Modelling](#data-modelling)
-- [Model Assessment](#model-assessment)
 - [Results](#results)
 
 ## Getting Started
