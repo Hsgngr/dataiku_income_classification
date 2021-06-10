@@ -128,13 +128,57 @@ These are the most important classes - subclasses. Instance weight is an interes
 ![image](https://user-images.githubusercontent.com/32769732/120942495-2d4d1d80-c6de-11eb-8d30-644df2af7212.png)
 
 
-Bir sürü feature
 ## Data Modelling
 ![image](https://user-images.githubusercontent.com/32769732/121442435-89af7780-c940-11eb-8103-cf302996d67a.png)
+
 ## Results
+
+Steps:
+* preprocessing (categorizing the data)
+* feature engineering ( generating new features)
+* feature selection
+* ensemble learning (stacking)
+* model_evaluation and going back to other steps iteratively.
+
 ![image](https://user-images.githubusercontent.com/32769732/121442442-8e742b80-c940-11eb-9089-640922d076cc.png)
 ![image](https://user-images.githubusercontent.com/32769732/121442408-7d2b1f00-c940-11eb-8684-32836d2f8051.png)
 
-Accuracy= 0.96
+### Conclusion
+These are the 22 features lastly selected for the model.
+
+* Age
+* Class of Worker
+* Industry Code
+* Occupation Code
+* Education
+* Wage per hour
+* Marital Status 
+* Major Industry Code
+* Major Occupation Code
+* Sex
+* Capital Gains
+* Capital Losses
+* Dividends from Stocks
+* Tax Filer Status
+* Detailed Household and family Statistics
+* Detailed Household summary in household
+* Instance weight
+* Number of persons worked for employer
+* Country of Birth Father
+* Country of Birth Mother
+* Own Business or Self Employed
+* Weeks Worked In Years
+
+The US Census Data shows that having more than $50K income is only valid for %7 US population.
+Most of the individuals who have more income than $50K are white but as a ratio Asian or Pacific Islanders have higher probability.
+Having Capital Gain, Losses, or dividend from a stock indicates the probability of more income than $50K
+Distribution shows an inequality by gender, men gets %5 percent while women gets only %1.
+Age is an indicator for predict the individuals with more money. There is a normal distribution on that while age doesnt have much indication for income less than $50K.
+Marrried Civillians has more chance to earn more than $50K than never married people.
+
+My model's accuracy of predicting people with less income is %98. The accuracy of prediction for people who has higher income is %60, with together the model's macro average is %79. The baseline was %46. There is always room for improvement for example data needs more features to predict the people who has more income, do they have real-estate, their living location etc.
+
+
+
 
 
