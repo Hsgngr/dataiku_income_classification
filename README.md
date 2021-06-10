@@ -120,7 +120,7 @@ As preprocessing we should handle this imbalance data. Let's keep exploring the 
 
 * In the dataset the ratio of men and women are not equal, there is a small difference. However the most significant thing is the wealthier men's percentage is 5 times more than wealthier women.
 
-Will add more
+
 ## Data Preprocessing and Feature Engineering
 I used my own library to extract feature importances for the task:
 ![image](https://user-images.githubusercontent.com/32769732/120941836-e3623880-c6d9-11eb-9047-18158b1e0c64.png)
