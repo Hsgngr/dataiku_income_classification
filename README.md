@@ -178,6 +178,20 @@ Marrried Civillians has more chance to earn more than $50K than never married pe
 
 My model's accuracy of predicting people with less income is %98. The accuracy of prediction for people who has higher income is %60, with together the model's macro average is %79. The baseline was %46. There is always room for improvement for example data needs more features to predict the people who has more income, do they have real-estate, their living location etc.
 
+### After Interview:
+
+1) I could have put requirements.txt file, I didn't.
+2) Question: How would you make sure that your training and test sets are coming from same distribution ?
+You give label them, 1 for training 0 for test for example. Then Train a model to distinguish them. If model behaves %50 (which is the worst case for binary) that means they are coming from same distribution.
+3) You should'nt use instance_weight, if you dont use it, show that you are not using it.
+4) Show that you used upsample&downsample in your main code, (I didn't put because it wasn't increasing the f1-score)
+5) Question: How are you collabrating with your teammates: Version-control, pair programming
+6) Question: How do you share your environment with others: Requirement.txt, docker containers
+7) Next time do your main_code.py as a notebook to show the results of your every step also.
+8) They didn't care about presentation that much. (Didnt allow me to present)
+9) Question: Is it a problem for you to work with people ? No, I love them.
+
+Thats all, overall the interview went okay.
 
 
 
